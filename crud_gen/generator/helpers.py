@@ -55,8 +55,6 @@ def build_field_code(field):
 
     return code
 
-
-
 def CreateModel(app_name, model_name, model_fields):
     """
     model_fields: list of dicts (from ModelFieldForm.cleaned_data)

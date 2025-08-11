@@ -1,4 +1,4 @@
-PROJECT_URL = 'D:\projects\Web_Development\crud_gen'
+PROJECT_URL = 'D:\GitHub\Django-code-generator\crud_gen'
 APP_NAME = 'generator'
 FOLDER_INSIDE_APP_NAME = ''
 TARGET_URL = PROJECT_URL + '\\' + APP_NAME + '\\' + FOLDER_INSIDE_APP_NAME
