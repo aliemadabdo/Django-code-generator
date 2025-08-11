@@ -1,0 +1,51 @@
+<!-- generator/templates/generator/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Generator Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1em 0;
+        }
+        main {
+            margin: 2em;
+        }
+        a.button {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1em;
+        }
+        a.button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to the Code Generator</h1>
+</header>
+
+<main>
+    <p>Select a feature to generate:</p>
+    <a href="{% url 'generator:add_model_field' %}" class="button">Add Field</a>
+    <a href="{% url 'generator:add_model' %}" class="button">Add Model</a>
+</main>
+
+</body>
+</html>
