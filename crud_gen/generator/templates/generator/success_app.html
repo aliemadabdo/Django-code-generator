@@ -1,0 +1,25 @@
+{% extends "generator/base.html" %}
+{% load static %}
+
+{% block title %}App Added{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  {% if success %}
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">App created</h4>
+      <p>The App <strong>{{ app_name }}</strong> was created successfully.</p>
+    </div>
+  {% else %}
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Something went wrong</h4>
+      <p>We couldn't create the App. Please try again.</p>
+    </div>
+  {% endif %}
+
+  <div class="mt-3">
+    <a href="{% url 'generator:create_crud_app' %}" class="btn btn-primary">Add another App</a>
+    <a href="{% url 'generator:home' %}" class="btn btn-secondary">Back to Home</a>
+  </div>
+</div>
+{% endblock %}
