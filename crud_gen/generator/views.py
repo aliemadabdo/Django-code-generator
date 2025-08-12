@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 from generator.configs import APP_NAME
-from generator.forms import modelForm, ModelFieldForm
-from generator.helpers import CreateModel
+from generator.forms import CreateAppForm, modelForm, ModelFieldForm
+from generator.helpers import *
 from generator.models import ModelField
 
 # Create your views here.
@@ -87,3 +87,21 @@ def add_model_field(request):
         # Render the form for adding a model field
         form = ModelFieldForm()
         return render(request, 'generator/add_model_field.html', {'form': form})
+
+def create_crud_app(request):
+    if request.method == 'POST':
+        form = CreateAppForm(request.POST)
+        if form.is_valid():
+            model_name = form.cleaned_data['model_name']
+            app_title = form.cleaned_data['app_title']
+
+            create_forms(model_name)
+            create_urls(model_name)
+            create_views(model_name)
+            create_templates(model_name, app_title)
+
+        return render(request, 'generator/success_app.html', {'success': True, 'app_title': app_title})
+        
+    else:
+        form = CreateAppForm()
+        return render(request, 'generator/create_crud_app.html', {'form': form})

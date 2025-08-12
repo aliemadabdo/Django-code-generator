@@ -121,3 +121,7 @@ class ModelFieldForm(forms.Form):
         required=False,
         help_text='Optional field options in JSON format, e.g. {"max_length": 255}'
     )
+
+class CreateAppForm(forms.Form):
+    model_name = forms.CharField(label='Model Name', max_length=100, help_text='Write a manully or automatically created model name to build your app on')
+    app_title = forms.CharField(label='App Title', max_length=100, help_text='The header of your pages (accept Arabic)')

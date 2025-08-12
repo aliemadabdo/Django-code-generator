@@ -8,4 +8,6 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('add_model/', add_model, name='add_model'),
     path('add_model_field/', add_model_field, name='add_model_field'),
-]
+    path('create_crud_app/', create_crud_app, name='create_crud_app'),
+
+        ]
