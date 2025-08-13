@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'generator.apps.GeneratorConfig',
+    # 'livereload',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'livereload.middleware.LiveReloadScript',
+
 ]
 
 ROOT_URLCONF = 'crud_gen.urls'
@@ -69,6 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crud_gen.wsgi.application'
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # optional for shared files
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # for collectstatic
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

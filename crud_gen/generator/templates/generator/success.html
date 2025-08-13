@@ -1,25 +1,17 @@
 {% extends "generator/base.html" %}
 {% load static %}
 
-{% block title %}Field Added{% endblock %}
+{% block title %}{{ element }} Added{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-  {% if success %}
     <div class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Field created</h4>
-      <p>The field <strong>{{ field_name }}</strong> was created successfully.</p>
+      <h4 class="alert-heading">{{ element }} created</h4>
+      <p>The {{ element }} <strong>{{ element_name }}</strong> was created successfully.</p>
     </div>
-  {% else %}
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading">Something went wrong</h4>
-      <p>We couldn't create the field. Please try again.</p>
-    </div>
-  {% endif %}
-
   <div class="mt-3">
-    <a href="{% url 'generator:add_model_field' %}" class="btn btn-primary">Add another field</a>
-    <a href="{% url 'generator:add_model' %}" class="btn btn-secondary">Back to models</a>
+    <a href="{% url 'generator:home' %}" class="btn btn-secondary">Back to Home</a>
+    <a href="{% url 'generator:add_field' %}" class="btn btn-primary">Add another field first</a>
   </div>
 </div>
 {% endblock %}
