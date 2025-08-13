@@ -1,1 +1,5 @@
 crud_gen/staticfiles
+**/*.cpython
+**/*.pyc
+db.sqlite3
+**/migrations
