@@ -4,10 +4,8 @@ app_name = 'generator'
 urlpatterns = [
     # Define your app's URLs here
     path('', home, name='home'),
-    path('about/', about, name='about'),
-    path('contact/', contact, name='contact'),
+    path('add_field/', add_field, name='add_field'),
     path('add_model/', add_model, name='add_model'),
-    path('add_model_field/', add_model_field, name='add_model_field'),
-    path('create_crud_app/', create_crud_app, name='create_crud_app'),
+    path('add_app/', add_app, name='add_app'),
 
         ]

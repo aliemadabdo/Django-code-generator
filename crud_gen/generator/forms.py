@@ -3,30 +3,6 @@ from django import forms
 from generator.models import ModelField
 
 
-class modelForm(forms.Form):    # This form is used to create a model with the specified fields
-    model_name = forms.CharField(label='Model Name', max_length=100)
-
-    # a select multiple choice field to select the fields of the model
-    # the fields should be as dropdown options
-    # the options should be the fields defined in ModelFieldForm stored in the database
-    # the user can select multiple fields to create the model
-    model_fields = forms.ModelMultipleChoiceField(
-        queryset=ModelField.objects.all(),
-        label='Model Fields',
-        widget=forms.CheckboxSelectMultiple,
-        help_text='Select the fields to include in the model. You can create fields using the ModelFieldForm.'
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['model_fields'].queryset = ModelField.objects.all()
-
-    def clean_model_name(self):
-        model_name = self.cleaned_data.get('model_name')
-        if not model_name:
-            raise forms.ValidationError('Model name is required.')
-        return model_name
-    
 class ModelFieldForm(forms.Form):
     # This form is used to create get the structure of the model fields then use it to generate the model
     field_name = forms.CharField(label='Field Name', max_length=100)
@@ -122,6 +98,30 @@ class ModelFieldForm(forms.Form):
         help_text='Optional field options in JSON format, e.g. {"max_length": 255}'
     )
 
+class modelForm(forms.Form):    # This form is used to create a model with the specified fields
+    model_name = forms.CharField(label='Model Name', max_length=100)
+
+    # a select multiple choice field to select the fields of the model
+    # the fields should be as dropdown options
+    # the options should be the fields defined in ModelFieldForm stored in the database
+    # the user can select multiple fields to create the model
+    model_fields = forms.ModelMultipleChoiceField(
+        queryset=ModelField.objects.all(),
+        label='Model Fields',
+        widget=forms.CheckboxSelectMultiple,
+        help_text='Select the fields to include in the model. You can create fields using the ModelFieldForm.'
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['model_fields'].queryset = ModelField.objects.all()
+
+    def clean_model_name(self):
+        model_name = self.cleaned_data.get('model_name')
+        if not model_name:
+            raise forms.ValidationError('Model name is required.')
+        return model_name
+    
 class CreateAppForm(forms.Form):
     model_name = forms.CharField(label='Model Name', max_length=100, help_text='Write a manully or automatically created model name to build your app on')
     app_title = forms.CharField(label='App Title', max_length=100, help_text='The header of your pages (accept Arabic)')

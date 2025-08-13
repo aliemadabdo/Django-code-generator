@@ -10,37 +10,8 @@ from generator.models import ModelField
 def home(request):
     return render(request, 'generator/home.html')
 
-def about(request):
-    return render(request, 'generator/about.html')
-
-def contact(request):
-    return render(request, 'generator/contact.html')
-
-def add_model(request):
-    if request.method == 'POST':
-        form = modelForm(request.POST)
-        if form.is_valid():
-            # Process the form data and create the model
-            model_name = form.cleaned_data['model_name']
-            model_fields = form.cleaned_data['model_fields']
-            print(f"Creating model: {model_name} with fields: {[field.field_name for field in model_fields]}")
-            # i need to print the internal data of fields inside the model_fields
-            for field in model_fields:
-                print(f"Field Name: {field.field_name}, Type: {field.field_type}, Is Foreign Key: {field.is_foreign_key}, Related Model: {field.related_model}, blank: {field.blank}, null: {field.null}, default: {field.default}, verbose_name: {field.verbose_name}, help_text: {field.help_text}")
-                # You can also access other attributes if needed
-
-            CreateModel(APP_NAME, model_name, model_fields)
-            
-            # Redirect or render a success message
-            return render(request, 'generator/add_model.html', {'model_name': model_name})
-    else:
-        # Render the form for adding a model
-        form = modelForm()
-        return render(request, 'generator/add_model.html', {'form': form})
     
-    return render(request, 'generator/add_model.html')
-
-def add_model_field(request):
+def add_field(request):
     if request.method == 'POST':
         form = ModelFieldForm(request.POST)
         if form.is_valid():
@@ -82,13 +53,36 @@ def add_model_field(request):
 
             modelField.save()
             # Here you would typically save the field to the database or use it as needed
-            return render(request, 'generator/success.html', {'success': True, 'field_name': field_name})
+            return render(request, 'generator/success.html', {'element_name': field_name, 'element': 'field'})
+        else:
+            return render(request, 'generator/error.html', {'element': 'field'})
     else:
         # Render the form for adding a model field
         form = ModelFieldForm()
-        return render(request, 'generator/add_model_field.html', {'form': form})
+        return render(request, 'generator/add_field.html', {'form': form})
 
-def create_crud_app(request):
+
+def add_model(request):
+    if request.method == 'POST':
+        form = modelForm(request.POST)
+        if form.is_valid():
+            # Process the form data and create the model
+            model_name = form.cleaned_data['model_name']
+            model_fields = form.cleaned_data['model_fields']
+
+            CreateModel(APP_NAME, model_name, model_fields)
+            
+            # Redirect or render a success message
+            return render(request, 'generator/success.html', {'element_name': model_name, 'element': 'model'})
+        else:
+            return render(request, 'generator/error.html', {'element': 'model'})
+    else:
+        # Render the form for adding a model
+        form = modelForm()
+        return render(request, 'generator/add_model.html', {'form': form})
+    
+
+def add_app(request):
     if request.method == 'POST':
         form = CreateAppForm(request.POST)
         if form.is_valid():
@@ -100,8 +94,9 @@ def create_crud_app(request):
             create_views(model_name)
             create_templates(model_name, app_title)
 
-        return render(request, 'generator/success_app.html', {'success': True, 'app_title': app_title})
-        
+            return render(request, 'generator/success.html', {'element_name': app_title, 'element': 'app'})
+        else:
+            return render(request, 'generator/error.html', {'element': 'app'})        
     else:
         form = CreateAppForm()
-        return render(request, 'generator/create_crud_app.html', {'form': form})
+        return render(request, 'generator/add_app.html', {'form': form})

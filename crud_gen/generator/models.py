@@ -22,21 +22,3 @@ class ModelField(models.Model):
         return self.field_name
 
 
-class MarriedRecruit(models.Model):
-    name = models.CharField(verbose_name="name")
-    social_status = models.CharField(choices=[("", "--------"),("A", "أعزب"),("B", "متزوج")], verbose_name="social_status")
-    phone_number = models.CharField(blank=True, null=True, unique=True, verbose_name="phone_number")
-    start_date = models.DateTimeField(verbose_name="start_date")
-    rec = models.CharField(max_length=100, blank=True, null=True, default="z", unique=True, help_text="x", choices=[("", "--------"),("A", "أعزب"),("B", "متزوج")], verbose_name="c")
-    Gov = models.CharField(max_length=500, blank=True, null=True, default="دمنهور", unique=True, help_text="اختار المحافظة الحالية", choices=[("", "--------"),("A", "دمنهور"),("B", "الاسكندرية")], verbose_name="المحافظة")
-
-
-
-class MarriedRecruit(models.Model):
-    name = models.CharField(verbose_name="name")
-    social_status = models.CharField(choices=[("", "--------"),("A", "أعزب"),("B", "متزوج")], verbose_name="social_status")
-    phone_number = models.CharField(blank=True, null=True, unique=True, verbose_name="phone_number")
-    start_date = models.DateTimeField(verbose_name="start_date")
-    rec = models.CharField(max_length=100, blank=True, null=True, default="z", unique=True, help_text="x", choices=[("", "--------"),("A", "أعزب"),("B", "متزوج")], verbose_name="c")
-    Gov = models.CharField(max_length=500, blank=True, null=True, default="دمنهور", unique=True, help_text="اختار المحافظة الحالية", choices=[("", "--------"),("A", "دمنهور"),("B", "الاسكندرية")], verbose_name="المحافظة")
-
